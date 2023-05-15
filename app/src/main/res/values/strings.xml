@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">finalPi</string>
+    <string name="minhas_listas_text">Minhas Listas</string>
+    <string name="add_icon">+</string>
+    <string name="criar_lista_text">Criar Lista</string>
+    <string name="nome_lista_text">Nome lista</string>
+    <string name="date_text">data</string>
+    <string name="Hour_text">hora</string>
 </resources>

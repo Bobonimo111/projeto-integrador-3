@@ -1,23 +1,24 @@
 package com.william.finalpi.personAdpaters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.william.finalpi.R;
-import com.william.finalpi.objetos.objLista;
+import com.william.finalpi.objetos.ObjLista;
 
 import java.util.List;
 
-public class adapterListas extends RecyclerView.Adapter<adapterListas.MyViewHolder>{
+public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHolder>{
     private Context context;
-    private List<objLista> listaListas;
+    private List<ObjLista> listaListas;
     private View.OnClickListener VisualizarLista = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -27,7 +28,7 @@ public class adapterListas extends RecyclerView.Adapter<adapterListas.MyViewHold
 
     };
 
-    public adapterListas(Context context, List<objLista> listaListas) {
+    public AdapterListas(Context context, List<ObjLista> listaListas) {
         this.context = context;
         this.listaListas = listaListas;
     }
@@ -44,9 +45,10 @@ public class adapterListas extends RecyclerView.Adapter<adapterListas.MyViewHold
     @Override
     //Quais ações seram tomadas por, item, como adicionar listeners entre outros.
     public void onBindViewHolder(@NonNull MyViewHolder Holder, int position) {
-        objLista lista = listaListas.get(position);
-        Holder.textViewListaName.setText(lista.getName());
-        Holder.textViewListaName.setOnClickListener(VisualizarLista);
+        ObjLista lista = listaListas.get(position);
+        Holder.buttonListaName.setText(lista.getName());
+        Holder.buttonListaName.setOnClickListener(VisualizarLista);
+        Holder.imageViewIcon.setImageResource(R.drawable.icons8);
 
     }
 
@@ -54,14 +56,18 @@ public class adapterListas extends RecyclerView.Adapter<adapterListas.MyViewHold
     public int getItemCount() {
         return listaListas.size();
     }
+    public void add(int postion,ObjLista item){
+        listaListas.add(item);
+
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private ImageView imageViewIcon;
-        private TextView textViewListaName;
+        private Button buttonListaName;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewIcon = itemView.findViewById(R.id.imageViewIcon);
-            textViewListaName = itemView.findViewById(R.id.textViewListaName);
+            buttonListaName = itemView.findViewById(R.id.buttonListaName);
 
         }
 

@@ -1,6 +1,6 @@
 package com.william.finalpi.objetos;
 
-public class objLista {
+public class ObjLista {
     private int id;
     private String name;
     private String date;
@@ -8,7 +8,7 @@ public class objLista {
     private String img;
 
 
-    public objLista(int id, String name, String date, String hour) {
+    public ObjLista(int id, String name, String date, String hour) {
         this.setId(id);
         this.setName(name);
         this.setDate(date);
@@ -17,7 +17,7 @@ public class objLista {
 
 
 
-    public objLista(int id, String name, String date, String hour, String img) {
+    public ObjLista(int id, String name, String date, String hour, String img) {
         this.setId(id);
         this.setName(name);
         this.setDate(date);
