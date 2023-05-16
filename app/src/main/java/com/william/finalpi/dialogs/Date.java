@@ -3,6 +3,7 @@ package com.william.finalpi.dialogs;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.widget.DatePicker;
 
@@ -20,8 +21,7 @@ public class Date {
         this.context = context;
     }
     public void dateDialog(){
-        DatePickerDialog.OnDateSetListener DateListener;
-        DateListener = new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener DateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int daySelected, int monthSelected, int yearSelected) {
                 monthSelected = monthSelected + 1;
@@ -37,6 +37,8 @@ public class Date {
                 Log.i("testes","datePicker: "+datePicker);
             }
         };
+
+
 
 
 
