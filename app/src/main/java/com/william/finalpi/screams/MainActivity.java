@@ -1,4 +1,4 @@
-package com.william.finalpi;
+package com.william.finalpi.screams;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.william.finalpi.R;
 import com.william.finalpi.objetos.ObjLista;
 import com.william.finalpi.personAdpaters.AdapterListas;
 

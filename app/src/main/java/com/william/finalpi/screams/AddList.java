@@ -1,8 +1,10 @@
-package com.william.finalpi;
+package com.william.finalpi.screams;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.william.finalpi.R;
 
 public class AddList extends AppCompatActivity {
 

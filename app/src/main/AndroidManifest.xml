@@ -12,10 +12,10 @@
         android:theme="@style/Theme.FinalPi"
         tools:targetApi="31">
         <activity
-            android:name=".AddList"
+            android:name=".screams.AddList"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".screams.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
