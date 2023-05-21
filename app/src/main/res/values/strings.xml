@@ -5,5 +5,9 @@
     <string name="criar_lista_text">Criar Lista</string>
     <string name="nome_lista_text">Nome lista</string>
     <string name="date_text">data</string>
-    <string name="Hour_text">hora</string>
+    <string name="hour_text">hora</string>
+    <string name="confirm_new_list">criar nova lista?</string>
+    <string name="cancel">cancelar</string>
+    <string name="create">criar</string>
+    <string name="value_invalid">valor invalido</string>
 </resources>

@@ -3,25 +3,31 @@ package com.william.finalpi.objetos;
 public class ObjLista {
     private int id;
     private String name;
-    private String date;
-    private String hour;
+    private String date_end;
+    private String hour_end;
     private String img;
 
 
-    public ObjLista(int id, String name, String date, String hour) {
+
+    public ObjLista(int id, String name, String date_end) {
         this.setId(id);
         this.setName(name);
-        this.setDate(date);
-        this.setHour(hour);
+        this.setDate(date_end);
+    }
+    public ObjLista(int id, String name, String date_end, String hour_end) {
+        this.setId(id);
+        this.setName(name);
+        this.setDate(date_end);
+        this.setHourEnd(hour_end);
     }
 
 
 
-    public ObjLista(int id, String name, String date, String hour, String img) {
+    public ObjLista(int id, String name, String date_end, String hour_end, String img) {
         this.setId(id);
         this.setName(name);
-        this.setDate(date);
-        this.setHour(hour);
+        this.setDate(date_end);
+        this.setHourEnd(hour_end);
         this.setImg(img);
     }
 
@@ -42,20 +48,20 @@ public class ObjLista {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateEnd() {
+        return date_end;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date_end = date;
     }
 
-    public String getHour() {
-        return hour;
+    public String getHourEnd() {
+        return hour_end;
     }
 
-    public void setHour(String hour) {
-        this.hour = hour;
+    public void setHourEnd(String hour) {
+        this.hour_end = hour;
     }
 
     public String getImg() {
@@ -65,4 +71,6 @@ public class ObjLista {
     public void setImg(String img) {
         this.img = img;
     }
+
+
 }

@@ -9,9 +9,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.william.finalpi.objetos.ObjLista;
 import com.william.finalpi.objetos.TarefaObj;
 
-class MyDataBaseHelper extends SQLiteOpenHelper {
+public class MyDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     public static final String DATABASE_NAME = "ListasTarefas.db";
@@ -74,17 +75,18 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
 
 
-    public void addLista(String list_name){
+    public void addLista(ObjLista lista){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(LISTAS_COLUMN_NAME,list_name);
+        cv.put(LISTAS_COLUMN_NAME,lista.getName());
+        cv.put(LISTAS_COLUMN_DATE_END,lista.getDateEnd());
 
         long result = db.insert(LISTAS_TABLE_NAME,null,cv);
         if (result == -1){
-            Toast.makeText(context,"Faled",Toast.LENGTH_LONG);
+            Toast.makeText(context,"Faled",Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(context,"Sucesse",Toast.LENGTH_LONG);
+            Toast.makeText(context,"Sucesse",Toast.LENGTH_LONG).show();
         }
 
     }
