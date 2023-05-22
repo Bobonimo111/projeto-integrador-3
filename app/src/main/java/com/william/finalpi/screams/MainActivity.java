@@ -3,13 +3,17 @@ package com.william.finalpi.screams;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.william.finalpi.R;
+import com.william.finalpi.bd.MyDataBaseHelper;
 import com.william.finalpi.objetos.ObjLista;
 import com.william.finalpi.personAdpaters.AdapterListas;
 
@@ -21,14 +25,18 @@ public class MainActivity extends AppCompatActivity {
     Button buttonCreateListScrean;
     List<ObjLista> listaLista = new ArrayList<>();
     AdapterListas adapater;
+
+    MyDataBaseHelper mydb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         setFindViewById();
         setRecyclerViewListas();
-        Test_AddLista();
+        selectAllList();
+        //Test_AddLista();
 
 
         buttonCreateListScrean.setOnClickListener(toCreateNewList);
@@ -46,12 +54,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewListas.setAdapter(adapater);
         recyclerViewListas.setLayoutManager(layoutManager);
     }
-    private void Test_AddLista(){
-        ObjLista objLista = new ObjLista(1,"willim", "wilim", "willw");
-        this.listaLista.add(objLista);
-        objLista = new ObjLista(2,"Daniel", "wilim", "willw");
-        this.listaLista.add(objLista);
+    private void selectAllList(){
+        mydb = new MyDataBaseHelper(this);
+        Cursor cursor = mydb.getDateListas();
+        try {
+            while (cursor.moveToNext()){
+                ObjLista newLista;
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String dateEnd = cursor.getString(2);
+                newLista = new ObjLista(id,name,dateEnd);
+                listaLista.add(newLista);
+            }
+
+        }catch (Exception e){
+            Log.e("testes","read dataBase "+e);
+        }
     }
+
 
     private View.OnClickListener toCreateNewList = new View.OnClickListener() {
         @Override
@@ -60,4 +80,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+    private void Test_AddLista(){
+        ObjLista objLista = new ObjLista(1,"willim", "wilim", "willw");
+        this.listaLista.add(objLista);
+        objLista = new ObjLista(2,"Daniel", "wilim", "willw");
+        this.listaLista.add(objLista);
+    }
 }

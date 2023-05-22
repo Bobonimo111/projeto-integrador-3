@@ -107,7 +107,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
 
     }
     public Cursor getDateListas() {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+LISTAS_TABLE_NAME+";",null);
         return  cursor;
     }

@@ -165,6 +165,7 @@ public class AddList extends AppCompatActivity {
                 }else{
                     lista = new ObjLista(0,editTextTextTitle.getText().toString(),"");
                 }
+                Log.i("testes","adionar listas a lista");
                 mydb.addLista(lista);
             }
         });
