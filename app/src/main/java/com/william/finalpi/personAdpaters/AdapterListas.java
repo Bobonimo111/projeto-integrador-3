@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.william.finalpi.OnClick.ClickToRequestId;
 import com.william.finalpi.R;
 import com.william.finalpi.objetos.ObjLista;
 
@@ -47,7 +48,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder Holder, int position) {
         ObjLista lista = listaListas.get(position);
         Holder.buttonListaName.setText(lista.getName());
-        Holder.buttonListaName.setOnClickListener(VisualizarLista);
+        Holder.buttonListaName.setOnClickListener(new ClickToRequestId(lista.getId(),this.context));
         Holder.imageViewIcon.setImageResource(R.drawable.icons8);
 
     }
