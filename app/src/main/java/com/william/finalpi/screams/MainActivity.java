@@ -2,6 +2,7 @@ package com.william.finalpi.screams;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.william.finalpi.OnClick.ClickToRequestId;
 import com.william.finalpi.R;
 import com.william.finalpi.bd.MyDataBaseHelper;
 import com.william.finalpi.objetos.ObjLista;
@@ -38,11 +40,13 @@ public class MainActivity extends AppCompatActivity {
         selectAllList();
         //Test_AddLista();
 
-
         buttonCreateListScrean.setOnClickListener(toCreateNewList);
 
 
     }
+
+
+
     private void setFindViewById(){
         recyclerViewListas = findViewById(R.id.recyclerViewListas);
         buttonCreateListScrean = findViewById(R.id.buttonCreateListScrean);

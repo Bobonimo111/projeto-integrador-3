@@ -25,7 +25,9 @@ public class ClickToRequestId implements View.OnClickListener {
     public void onClick(View v) {
         Log.i("idTest",""+this.id);
         Intent i = new Intent(context, Tarefas.class);
-        ContextCompat.startActivity(i);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+
     }
 
 }
