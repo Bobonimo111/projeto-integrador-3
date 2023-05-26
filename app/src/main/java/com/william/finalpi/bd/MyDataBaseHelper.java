@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.william.finalpi.objetos.ObjLista;
-import com.william.finalpi.objetos.TarefaObj;
+import com.william.finalpi.objetos.ObjTarefa;
 
 public class MyDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -90,7 +90,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
-    public void addTarefa(TarefaObj obj){
+    public void addTarefa(ObjTarefa obj){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -114,6 +114,12 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     public Cursor getDateTarefas() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+TAREFA_TABLE_NAME+";",null);
+        return  cursor;
+    }
+
+    public Cursor getDateTarefasByListas(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TAREFA_TABLE_NAME+" WHERE "+ TAREFA_COLUMN_LISTA_FK + " = " + id +" ;",null);
         return  cursor;
     }
 

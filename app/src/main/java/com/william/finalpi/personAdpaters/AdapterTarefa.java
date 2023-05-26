@@ -1,34 +1,33 @@
-package com.william.recycleradapterperson.tarefas.CustomAdapters;
+package com.william.finalpi.personAdpaters;
 
 import android.content.Context;
-
-import android.graphics.Paint;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.william.recycleradapterperson.R;
+import com.william.finalpi.R;
+import com.william.finalpi.objetos.ObjTarefa;
 
 import java.util.List;
 
 
-public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHolder>{
+public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHolder>{
 
 
 
-    private List<TarefaObj> lista;
+    private List<ObjTarefa> lista;
     private Context context;
 
 
-    public TarefaAdapter(Context context, List<TarefaObj> lista ){
+    public AdapterTarefa(Context context, List<ObjTarefa> lista ){
         this.lista = lista;
         this.context = context;
     }
@@ -53,7 +52,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder Holder, int position) {
-        TarefaObj tarefa = lista.get(position);
+        ObjTarefa tarefa = lista.get(position);
 
 
 
@@ -87,6 +86,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
             }
         });
 
+
     }
 
     @Override
@@ -94,18 +94,18 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
         return lista.size();
     }
 
-    public TarefaObj removeItem(int position) {
-        final TarefaObj model = lista.remove(position);
+    public ObjTarefa removeItem(int position) {
+        final ObjTarefa model = lista.remove(position);
         notifyItemRemoved(position);
         return model;
     }
 
-    public void addItem( TarefaObj model) {
+    public void addItem( ObjTarefa model) {
         lista.add(model);
     }
 
     public void moveItem(int fromPosition, int toPosition) {
-        final TarefaObj model = lista.remove(fromPosition);
+        final ObjTarefa model = lista.remove(fromPosition);
         lista.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }
