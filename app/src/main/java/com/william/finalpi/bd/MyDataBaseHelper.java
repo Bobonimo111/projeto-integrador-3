@@ -30,7 +30,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     public static final  String TAREFA_TABLE_NAME = "tarefas";
     public static final  String TAREFA_COLUMN_ID = "_id";
     public static final  String TAREFA_COLUMN_TITLE = "title";
-    public static final  String TAREFA_COLUMN_FINALIZADO = "FINALIZADO";
+    public static final  String TAREFA_COLUMN_CONCLUIDO = "FINALIZADO";
     public static final  String TAREFA_COLUMN_LISTA_FK = "LISTA_FK";
 
 
@@ -59,7 +59,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TAREFA_TABLE_NAME +
                 "( "+ TAREFA_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
                 TAREFA_COLUMN_TITLE + " TEXT ," +
-                TAREFA_COLUMN_FINALIZADO +" NUMERIC ," +
+                        TAREFA_COLUMN_CONCLUIDO +" NUMERIC ," +
                 TAREFA_COLUMN_LISTA_FK +" INTEGER " +");";
         db.execSQL(query_listas);
         db.execSQL(query_tarefas);
@@ -83,6 +83,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         cv.put(LISTAS_COLUMN_DATE_END,lista.getDateEnd());
 
         long result = db.insert(LISTAS_TABLE_NAME,null,cv);
+
         if (result == -1){
             Toast.makeText(context,"Faled",Toast.LENGTH_LONG).show();
         }else{
@@ -90,22 +91,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
-    public void addTarefa(ObjTarefa obj){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
 
-        cv.put(TAREFA_COLUMN_TITLE,obj.getTitle());
-        cv.put(TAREFA_COLUMN_FINALIZADO,obj.isConcluida());
-        cv.put(TAREFA_COLUMN_LISTA_FK,obj.getLista_fk_id());
-
-        long result = db.insert(TAREFA_TABLE_NAME,null,cv);
-        if (result == -1){
-            Toast.makeText(context,"Faled",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(context,"Sucesse",Toast.LENGTH_LONG).show();
-        }
-
-    }
     public Cursor getDateListas() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+LISTAS_TABLE_NAME+";",null);
@@ -122,5 +108,43 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM "+TAREFA_TABLE_NAME+" WHERE "+ TAREFA_COLUMN_LISTA_FK + " = " + id +" ;",null);
         return  cursor;
     }
+    public void addTarefa(ObjTarefa obj){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
 
+        cv.put(TAREFA_COLUMN_TITLE,obj.getTitle());
+        cv.put(TAREFA_COLUMN_CONCLUIDO,obj.isConcluida());
+        cv.put(TAREFA_COLUMN_LISTA_FK,obj.getLista_fk_id());
+
+        long result = db.insert(TAREFA_TABLE_NAME,null,cv);
+        if (result == -1){
+            Toast.makeText(context,"Faled",Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(context,"Sucesse",Toast.LENGTH_LONG).show();
+        }
+
+    }
+    public long updateTarefaConcluidas(int id,boolean concluido){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(TAREFA_COLUMN_CONCLUIDO,concluido);
+
+        long update = db.update(TAREFA_TABLE_NAME, cv, TAREFA_COLUMN_ID + " = ?", new String[]{""+id});
+
+        return update;
+    }
+    public long updateTarefa(int id, String tarefa){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(TAREFA_COLUMN_TITLE,tarefa);
+
+        long update = db.update(TAREFA_TABLE_NAME,cv,TAREFA_COLUMN_ID + " = ? ",new String[]{""+id});
+        return update;
+    }
+    public long deleteTarefa(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long delete = db.delete(TAREFA_TABLE_NAME,TAREFA_COLUMN_ID + " = ?", new String[]{""+id});
+        return delete;
+    }
 }

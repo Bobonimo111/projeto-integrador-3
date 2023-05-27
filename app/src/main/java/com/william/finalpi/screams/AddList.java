@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -167,6 +168,7 @@ public class AddList extends AppCompatActivity {
                 }
                 Log.i("testes","adionar listas a lista");
                 mydb.addLista(lista);
+                startActivity(new Intent(AddList.this,MainActivity.class));
             }
         });
         AlertDialog alertDialog = builder.create();

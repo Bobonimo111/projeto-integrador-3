@@ -13,6 +13,11 @@ public class ObjTarefa {
         this.id = id;
         this.lista_fk_id = lista_fk_id;
     }
+    public ObjTarefa( String title, boolean concluida, int lista_fk_id) {
+        this.concluida = concluida;
+        this.title = title;
+        this.lista_fk_id = lista_fk_id;
+    }
 
     public boolean isConcluida() {
         return concluida;

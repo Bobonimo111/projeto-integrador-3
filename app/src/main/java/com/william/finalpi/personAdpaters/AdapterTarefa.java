@@ -7,13 +7,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.william.finalpi.R;
+import com.william.finalpi.bd.MyDataBaseHelper;
 import com.william.finalpi.objetos.ObjTarefa;
 
 import java.util.List;
@@ -25,6 +29,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
 
     private List<ObjTarefa> lista;
     private Context context;
+    MyDataBaseHelper mydb;
 
 
     public AdapterTarefa(Context context, List<ObjTarefa> lista ){
@@ -53,7 +58,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder Holder, int position) {
         ObjTarefa tarefa = lista.get(position);
-
+        mydb = new MyDataBaseHelper(context);
 
 
 
@@ -67,6 +72,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
             spannableString.setSpan(new StrikethroughSpan(),0,spannableString.length(),0);
             Holder.campoTarefaTxt.setText(spannableString);
             Holder.campoTarefaConcluida.setChecked(tarefa.isConcluida());
+
         }else{
             Holder.campoTarefaTxt.setText(tarefa.getTitle());
         }
@@ -77,14 +83,46 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
             public void onClick(View view) {
                 Log.i("Adapter","Caixinha pressionada");
                 if(Holder.campoTarefaConcluida.isChecked()){
+                    //STYLE
                     SpannableString spannableString = new SpannableString(tarefa.getTitle());
                     spannableString.setSpan(new StrikethroughSpan(),0,spannableString.length(),0);
                     Holder.campoTarefaTxt.setText(spannableString);
+
+                    moveItem(position,lista.size()-1);
+
+                    //BACK-END
+                    try{
+                        mydb.updateTarefaConcluidas(tarefa.getId(),Holder.campoTarefaConcluida.isChecked());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }else{
                     Holder.campoTarefaTxt.setText(tarefa.getTitle());
                 }
             }
         });
+        Holder.campoTarefaTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                boolean isVoid = Holder.campoTarefaTxt.getText().toString().equals("");
+                try{
+                    if(!b && isVoid){
+                        mydb.deleteTarefa(tarefa.getId());
+                        lista.remove(position);
+                        notifyDataSetChanged();
+
+                    }
+                    if(!isVoid){
+                        mydb.updateTarefa(tarefa.getId(), Holder.campoTarefaTxt.getText().toString());
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
 
 
     }
@@ -95,7 +133,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
     }
 
     public ObjTarefa removeItem(int position) {
-        final ObjTarefa model = lista.remove(position);
+        ObjTarefa model = lista.remove(position);
         notifyItemRemoved(position);
         return model;
     }
@@ -105,7 +143,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
     }
 
     public void moveItem(int fromPosition, int toPosition) {
-        final ObjTarefa model = lista.remove(fromPosition);
+        ObjTarefa model = lista.remove(fromPosition);
         lista.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }
@@ -116,12 +154,12 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
 
     public class MyViewHolder extends  RecyclerView.ViewHolder{
         CheckBox campoTarefaConcluida;
-        TextView campoTarefaTxt;
+        EditText campoTarefaTxt;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             campoTarefaConcluida = itemView.findViewById(R.id.CampoTarefaConcluida);
             campoTarefaTxt= itemView.findViewById(R.id.CampoTarefaTxt);
-                   }
+        }
 
     }
 

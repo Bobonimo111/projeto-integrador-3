@@ -15,8 +15,10 @@ import com.william.finalpi.screams.Tarefas;
 public class ClickToRequestId implements View.OnClickListener {
 
     private int id;
+    private String name;
     private Context context;
-    public ClickToRequestId(int id, Context context) {
+    public ClickToRequestId(String name,int id, Context context) {
+        this.name = name;
         this.id = id;
         this.context = context;
     }
@@ -25,7 +27,8 @@ public class ClickToRequestId implements View.OnClickListener {
     public void onClick(View v) {
         Log.i("idTest",""+this.id);
         Intent i = new Intent(context, Tarefas.class);
-        i.putExtra("id_lista",id);
+        i.putExtra("lista_name",this.name);
+        i.putExtra("lista_id",this.id);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
 

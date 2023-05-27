@@ -48,7 +48,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder Holder, int position) {
         ObjLista lista = listaListas.get(position);
         Holder.buttonListaName.setText(lista.getName());
-        Holder.buttonListaName.setOnClickListener(new ClickToRequestId(lista.getId(),this.context));
+        Holder.buttonListaName.setOnClickListener(new ClickToRequestId(lista.getName(),lista.getId(),this.context));
         Holder.imageViewIcon.setImageResource(R.drawable.icons8);
 
     }
