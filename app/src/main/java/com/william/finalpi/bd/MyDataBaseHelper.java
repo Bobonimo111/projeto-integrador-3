@@ -97,6 +97,20 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM "+LISTAS_TABLE_NAME+";",null);
         return  cursor;
     }
+    public long uptdateLista(int id, String name){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(LISTAS_COLUMN_NAME,name);
+        long update = db.update(LISTAS_TABLE_NAME,cv,LISTAS_TABLE_NAME + " = ? ",new String[]{""+id});
+
+
+        return update;
+    }
+    public long deleteLista(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long delete = db.delete(LISTAS_TABLE_NAME,LISTAS_COLUMN_ID + " = ?", new String[]{""+id});
+        return delete;
+    }
     public Cursor getDateTarefas() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+TAREFA_TABLE_NAME+";",null);

@@ -21,8 +21,6 @@ public class ObjLista {
         this.setHourEnd(hour_end);
     }
 
-
-
     public ObjLista(int id, String name, String date_end, String hour_end, String img) {
         this.setId(id);
         this.setName(name);

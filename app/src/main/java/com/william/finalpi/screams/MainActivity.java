@@ -1,5 +1,6 @@
 package com.william.finalpi.screams;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,9 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.william.finalpi.R;
 import com.william.finalpi.bd.MyDataBaseHelper;
 import com.william.finalpi.objetos.ObjLista;
@@ -24,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerViewListas;
     Button buttonCreateListScrean;
     List<ObjLista> listaLista = new ArrayList<>();
-    AdapterListas adapater;
+    AdapterListas adapater ;
+
 
     MyDataBaseHelper mydb;
     @Override
@@ -41,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         buttonCreateListScrean.setOnClickListener(toCreateNewList);
 
 
+
+
+
+
     }
 
 
@@ -48,14 +59,20 @@ public class MainActivity extends AppCompatActivity {
     private void setFindViewById(){
         recyclerViewListas = findViewById(R.id.recyclerViewListas);
         buttonCreateListScrean = findViewById(R.id.buttonCreateListScrean);
+
     }
     private void setRecyclerViewListas(){
         adapater = new AdapterListas(this,listaLista);
-        RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(getApplicationContext());
 
         recyclerViewListas.setAdapter(adapater);
+
         recyclerViewListas.setLayoutManager(layoutManager);
     }
+
+
+
+
     private void selectAllLists(){
         mydb = new MyDataBaseHelper(this);
         Cursor cursor = mydb.getDateListas();
@@ -83,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+//    private View.OnClickListener VisibleMenu = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            if(floatingActionButton.getVisibility() == (View.INVISIBLE)){
+//                floatingActionButton.setVisibility(View.VISIBLE);
+//            }else{
+//                floatingActionButton.setVisibility(View.INVISIBLE);
+//            }
+//        }
+//    };
 
     private void Test_AddLista(){
         ObjLista objLista = new ObjLista(1,"willim", "wilim", "willw");
@@ -90,4 +117,6 @@ public class MainActivity extends AppCompatActivity {
         objLista = new ObjLista(2,"Daniel", "wilim", "willw");
         this.listaLista.add(objLista);
     }
+
+
 }

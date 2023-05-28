@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">finalPi</string>
+    <string name="app_name">Lista de tarefas</string>
     <string name="minhas_listas_text">Minhas Listas</string>
     <string name="add_icon">+</string>
     <string name="criar_lista_text">Criar Lista</string>
@@ -9,5 +9,7 @@
     <string name="confirm_new_list">criar nova lista?</string>
     <string name="cancel">cancelar</string>
     <string name="create">criar</string>
+    <string name="delete">deletar</string>
+    <string name="edit">editar</string>
     <string name="value_invalid">valor invalido</string>
 </resources>
