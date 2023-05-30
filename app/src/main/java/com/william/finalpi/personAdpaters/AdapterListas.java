@@ -72,7 +72,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
                                 editarLista(Holder.getPosition());
                                 break;
                             case 1:
-                                //deleteLista(Holder.getPosition());
+                                deleteLista(Holder.getPosition());
                                 break;
 
                         }
@@ -110,6 +110,27 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
         builder.create().show();
     }
 
+    private void deleteLista(int postion){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("deletar lista " + listaListas.get(postion).getName());
+        builder.setMessage("Confirmar delecção");
+        builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myDb.deleteLista(listaListas.get(postion).getId());
+                deleteItem(postion);
+            }
+        });
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+         builder.create().show();
+
+
+    }
 
 
 
