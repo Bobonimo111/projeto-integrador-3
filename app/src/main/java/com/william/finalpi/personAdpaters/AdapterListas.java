@@ -1,7 +1,6 @@
 package com.william.finalpi.personAdpaters;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -9,28 +8,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.william.finalpi.OnClick.ClickToRequestId;
 import com.william.finalpi.R;
 import com.william.finalpi.bd.MyDataBaseHelper;
 import com.william.finalpi.objetos.ObjLista;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHolder>{
     private Context context;
+
     private List<ObjLista> listaListas;
     private MyDataBaseHelper myDb;
 
@@ -44,6 +38,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
     };
 
     public AdapterListas(Context context, List<ObjLista> listaListas) {
+        myDb = new MyDataBaseHelper(context);
         this.context = context;
         this.listaListas = listaListas;
     }
@@ -77,7 +72,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
                                 editarLista(Holder.getPosition());
                                 break;
                             case 1:
-
+                                //deleteLista(Holder.getPosition());
                                 break;
 
                         }
@@ -91,34 +86,31 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
 
     }
 
-    public void editarLista(int postion){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = new LayoutInflater(context) {
+    public void editarLista(int position){
+        LayoutInflater inflater = new LayoutInflater(LayoutInflater.from(context), context) {
             @Override
-            public LayoutInflater cloneInContext(Context context) {
-
+            public LayoutInflater cloneInContext(Context newContext) {
                 return null;
-
             }
         };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View v = inflater.inflate(R.layout.dialog_edit_lista,null);
-
-        builder.setView(R.layout.dialog_edit_lista);
-        builder.setTitle(listaListas.get(postion).getName());
-
-
-
-        builder.setPositiveButton(R.string.edit, new DialogInterface.OnClickListener()  {
+        EditText editTextTxt = v.findViewById(R.id.editTextTxt);
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                EditText e =  v.findViewById(R.id.editTextTxt);
-                Toast.makeText(context,(""+ e.getText()),Toast.LENGTH_SHORT).show();
+            public void onClick(DialogInterface dialog, int which) {
+                String listaNome = editTextTxt.getText().toString();
+                Log.e("testes",listaNome);
+                updateItemName(position,listaNome);
+                myDb.uptdateLista(listaListas.get(position).getId(),listaNome);
             }
         });
-
+        builder.setView(v);
         builder.create().show();
     }
+
+
 
 
 
@@ -130,6 +122,17 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
     public void add(int postion,ObjLista item){
         listaListas.add(item);
 
+
+    }
+    public void updateItemName(int postion,String name){
+        ObjLista lista = listaListas.get(postion);
+        lista.setName(name);
+        listaListas.set(postion,lista);
+        notifyDataSetChanged();
+    }
+    public void deleteItem(int positon){
+        listaListas.remove(positon);
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

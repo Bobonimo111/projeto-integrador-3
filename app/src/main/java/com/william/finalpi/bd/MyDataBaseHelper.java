@@ -101,10 +101,9 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(LISTAS_COLUMN_NAME,name);
-        long update = db.update(LISTAS_TABLE_NAME,cv,LISTAS_TABLE_NAME + " = ? ",new String[]{""+id});
-
-
+        long update = db.update(LISTAS_TABLE_NAME,cv,LISTAS_COLUMN_ID + " = ?",new String[]{""+id});
         return update;
+
     }
     public long deleteLista(int id){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -157,6 +156,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     }
     public long deleteTarefa(int id){
         SQLiteDatabase db = this.getWritableDatabase();
+
 
         long delete = db.delete(TAREFA_TABLE_NAME,TAREFA_COLUMN_ID + " = ?", new String[]{""+id});
         return delete;
