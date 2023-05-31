@@ -46,8 +46,9 @@ public class AddList extends AppCompatActivity {
         setFindViewById();
         buttonDate.setOnClickListener(clickToOpenDate);
         buttonTime.setOnClickListener(clickToOpenTime);
-        buttonNovaLista.setOnClickListener(clickOptionNewList);
+        buttonNovaLista.setOnClickListener(clickToCreateNewList);
         mydb = new MyDataBaseHelper(this);
+
 
     }
 
@@ -72,7 +73,7 @@ public class AddList extends AppCompatActivity {
             timePickerDialog.show();
         }
     };
-    private View.OnClickListener clickOptionNewList = new View.OnClickListener() {
+    private View.OnClickListener clickToCreateNewList = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             //Checar se o title esta vazio, ou se o item ja existe;
@@ -150,13 +151,14 @@ public class AddList extends AppCompatActivity {
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                 Log.i("dialog","cancel clicado");
             }
         });
         builder.setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Calendar c = Calendar.getInstance();
+                c.getTime();
                 if(!inputDate.equals("")){
                     if(!inputTime.equals("")){
                         lista = new ObjLista(0,editTextTextTitle.getText().toString(),inputDate,inputTime);

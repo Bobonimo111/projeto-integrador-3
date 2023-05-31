@@ -3,28 +3,29 @@ package com.william.finalpi.objetos;
 public class ObjLista {
     private int id;
     private String name;
-    private String date_end;
-    private String hour_end;
+    private String dateEnd;
+    private String dateInit;
+    private String hourEnd;
     private String img;
 
 
 
-    public ObjLista(int id, String name, String date_end) {
+    public ObjLista(int id, String name, String date_init) {
         this.setId(id);
         this.setName(name);
-        this.setDate(date_end);
+        this.setDateInit(date_init);
     }
     public ObjLista(int id, String name, String date_end, String hour_end) {
         this.setId(id);
         this.setName(name);
-        this.setDate(date_end);
+        this.setDateEnd(date_end);
         this.setHourEnd(hour_end);
     }
 
     public ObjLista(int id, String name, String date_end, String hour_end, String img) {
         this.setId(id);
         this.setName(name);
-        this.setDate(date_end);
+        this.setDateEnd(date_end);
         this.setHourEnd(hour_end);
         this.setImg(img);
     }
@@ -47,19 +48,19 @@ public class ObjLista {
     }
 
     public String getDateEnd() {
-        return date_end;
+        return dateEnd;
     }
 
-    public void setDate(String date) {
-        this.date_end = date;
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public String getHourEnd() {
-        return hour_end;
+        return hourEnd;
     }
 
     public void setHourEnd(String hour) {
-        this.hour_end = hour;
+        this.hourEnd = hour;
     }
 
     public String getImg() {
@@ -71,4 +72,11 @@ public class ObjLista {
     }
 
 
+    public String getDateInit() {
+        return dateInit;
+    }
+
+    public void setDateInit(String dateInit) {
+        this.dateInit = dateInit;
+    }
 }

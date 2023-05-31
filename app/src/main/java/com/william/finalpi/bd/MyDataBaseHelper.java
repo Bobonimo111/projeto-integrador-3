@@ -76,16 +76,19 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
 
 
     public void addLista(ObjLista lista){
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(LISTAS_COLUMN_NAME,lista.getName());
         cv.put(LISTAS_COLUMN_DATE_END,lista.getDateEnd());
+        cv.put(LISTAS_COLUMN_DATE_INIT,lista.getDateInit());
+        cv.put(LISTAS_COLUMN_DATE_END,lista.getDateEnd());
 
         long result = db.insert(LISTAS_TABLE_NAME,null,cv);
 
         if (result == -1){
-            Toast.makeText(context,"Faled",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Failed",Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(context,"Sucesse",Toast.LENGTH_LONG).show();
         }
