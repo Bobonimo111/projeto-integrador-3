@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -111,6 +112,14 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     public long deleteLista(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         long delete = db.delete(LISTAS_TABLE_NAME,LISTAS_COLUMN_ID + " = ?", new String[]{""+id});
+        Log.d("MyDataBase","Resultado "+delete);
+        return delete;
+    }
+
+    public long deleteTarefasOfList(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long delete = db.delete(TAREFA_TABLE_NAME, TAREFA_COLUMN_LISTA_FK + " = ?",new String[]{""+id});
+
         return delete;
     }
     public Cursor getDateTarefas() {

@@ -113,15 +113,16 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
     private void deleteLista(int postion){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("deletar lista " + listaListas.get(postion).getName());
-        builder.setMessage("Confirmar delecção");
-        builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+        builder.setMessage("Você ira perder todos os itens salvos nessa lista \n tem certeza ?");
+        builder.setPositiveButton("confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 myDb.deleteLista(listaListas.get(postion).getId());
+                myDb.deleteTarefasOfList(listaListas.get(postion).getId());
                 deleteItem(postion);
             }
         });
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
