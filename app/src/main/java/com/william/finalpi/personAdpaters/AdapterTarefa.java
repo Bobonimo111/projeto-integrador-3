@@ -1,6 +1,7 @@
 package com.william.finalpi.personAdpaters;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.william.finalpi.R;
@@ -55,6 +58,8 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
         return new MyViewHolder(itemLista);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder Holder, int position) {
         ObjTarefa tarefa = lista.get(position);
@@ -76,6 +81,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
         }else{
             Holder.campoTarefaTxt.setText(tarefa.getTitle());
         }
+
 
         // Quando a chekBox for clicada é verificado se ela está clicada ou não
         Holder.campoTarefaConcluida.setOnClickListener(new View.OnClickListener() {
@@ -123,8 +129,6 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
         });
 
 
-
-
     }
 
     @Override
@@ -147,6 +151,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
         lista.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }
+
 
 
 

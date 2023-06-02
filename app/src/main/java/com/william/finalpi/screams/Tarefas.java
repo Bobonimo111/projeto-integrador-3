@@ -110,6 +110,7 @@ public class Tarefas extends AppCompatActivity {
         public void onClick(View view) {
             if(!editTextTextAdd.getText().toString().equals("")){
                 ObjTarefa tarefa = new ObjTarefa(editTextTextAdd.getText().toString(),false, lista_id);
+                editTextTextAdd.setText("");
                 mydb.addTarefa(tarefa);
                 adapter.addItem(tarefa);
                 adapter.notifyDataSetChanged();
@@ -119,5 +120,6 @@ public class Tarefas extends AppCompatActivity {
             }
         }
     };
+
 
 }
