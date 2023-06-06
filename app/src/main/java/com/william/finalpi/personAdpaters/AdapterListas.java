@@ -1,6 +1,7 @@
 package com.william.finalpi.personAdpaters;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.william.finalpi.OnClick.ClickToRequestId;
 import com.william.finalpi.R;
@@ -101,13 +103,20 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String listaNome = editTextTxt.getText().toString();
-                Log.e("testes",listaNome);
-                updateItemName(position,listaNome);
-                myDb.uptdateLista(listaListas.get(position).getId(),listaNome);
+                if(!listaNome.equals("")){
+                    Log.e("testes","Lista modificada");
+                    updateItemName(position,listaNome);
+                    myDb.uptdateLista(listaListas.get(position).getId(),listaNome);
+                }else{
+                    Toast.makeText(context, "Valor invalido", Toast.LENGTH_LONG).show();
+                    dialog.cancel();
+                }
+
             }
         });
         builder.setView(v);
-        builder.create().show();
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 
     private void deleteLista(int postion){
