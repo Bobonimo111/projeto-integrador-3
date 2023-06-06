@@ -48,7 +48,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
     //Setar qual o layout personalizado utilizar
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_item, parent, false);
+        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_lista, parent, false);
         return new MyViewHolder(itemLista);
     }
 
