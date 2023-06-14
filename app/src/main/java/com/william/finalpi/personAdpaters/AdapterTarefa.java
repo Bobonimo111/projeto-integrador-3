@@ -94,7 +94,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
                     spannableString.setSpan(new StrikethroughSpan(),0,spannableString.length(),0);
                     Holder.campoTarefaTxt.setText(spannableString);
 
-                    moveItem(position,lista.size()-1);
+                    moveItem(Holder.getAdapterPosition(), lista.size()-1);
 
                     //BACK-END
                     try{
@@ -120,7 +120,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
                 try{
                     if(!b && isVoid){
                         mydb.deleteTarefa(tarefa.getId());
-                        lista.remove(position);
+                        lista.remove(Holder.getAdapterPosition());
                         notifyDataSetChanged();
 
                     }
