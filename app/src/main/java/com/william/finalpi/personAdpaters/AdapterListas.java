@@ -102,7 +102,7 @@ public class AdapterListas extends RecyclerView.Adapter<AdapterListas.MyViewHold
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String listaNome = editTextTxt.getText().toString();
+                String listaNome = editTextTxt.getText().toString().trim();
                 if(!listaNome.equals("")){
                     Log.e("testes","Lista modificada");
                     updateItemName(position,listaNome);

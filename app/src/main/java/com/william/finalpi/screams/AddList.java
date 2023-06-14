@@ -161,12 +161,12 @@ public class AddList extends AppCompatActivity {
                 c.getTime();
                 if(!inputDate.equals("")){
                     if(!inputTime.equals("")){
-                        lista = new ObjLista(0,editTextTextTitle.getText().toString(),inputDate,inputTime);
+                        lista = new ObjLista(0,editTextTextTitle.getText().toString().trim(),inputDate,inputTime);
                     }else{
-                        lista = new ObjLista(0,editTextTextTitle.getText().toString(),inputDate);
+                        lista = new ObjLista(0,editTextTextTitle.getText().toString().trim(),inputDate);
                     }
                 }else{
-                    lista = new ObjLista(0,editTextTextTitle.getText().toString(),"");
+                    lista = new ObjLista(0,editTextTextTitle.getText().toString().trim(),"");
                 }
                 Log.i("testes","adionar listas a lista");
                 mydb.addLista(lista);

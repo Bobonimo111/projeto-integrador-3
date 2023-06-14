@@ -19,18 +19,17 @@
             android:id="@+id/CampoTarefaConcluida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/check_box"
 
             />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/CampoTarefaTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:text="Name"
-            />
+        />
 
 
 

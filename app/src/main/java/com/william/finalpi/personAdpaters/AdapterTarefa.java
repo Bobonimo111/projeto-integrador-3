@@ -104,6 +104,12 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
                     }
                 }else{
                     Holder.campoTarefaTxt.setText(tarefa.getTitle());
+                    //BACK-END
+                    try{
+                        mydb.updateTarefaConcluidas(tarefa.getId(),Holder.campoTarefaConcluida.isChecked());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -119,7 +125,7 @@ public class AdapterTarefa extends RecyclerView.Adapter<AdapterTarefa.MyViewHold
 
                     }
                     if(!isVoid){
-                        mydb.updateTarefa(tarefa.getId(), Holder.campoTarefaTxt.getText().toString());
+                        mydb.updateTarefa(tarefa.getId(), Holder.campoTarefaTxt.getText().toString().trim());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
